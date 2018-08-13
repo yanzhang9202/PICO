@@ -4,21 +4,21 @@ switch pb_type
         options = optimoptions('quadprog',...
         'Algorithm','interior-point-convex','Display','off');
     
-        Qc = num2cell(Q, [1,2]);
-        Hm = blkdiag(Qc{:});
-        fm = q(:);
-        um = u(:);  lm = l(:);
-    
+        H = sum(Q,3);
+        f = sum(q,2);
+        um = u(:,1);  lm = l(:,1);
+        
+        % Without local constraints
         [solm.x, solm.fval, solm.flagexit, solm.output, solm.lambda] = quadprog(...
-            Hm, fm, [], [], [], [], lm, um, [], options);
+            H, f, [], [], [], [], [], [], [], options);
         if solm.flagexit ~= 1
             error('Formulated problem cannot be exactly solved by Matlab!\n')
         end
         
-        datam.H = Hm;   datam.f = fm;
+        datam.H = H;   datam.f = f;
         datam.l = lm;   datam.u = um;
-        sol{ind_solver} = solm;
-        clear Qc Hm Ac Am fm bm lm um solm;
+        sol{ind} = solm;
+        clear H f lm um solm;
     otherwise
         error('Undefined Matlab solution!')
 end

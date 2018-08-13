@@ -18,6 +18,8 @@ ind_solver = 1; % 1 - matlab    2 - extra   3 - pico
 switch ind_solver
     case 1
         main_matlab;
+    case 2
+        main_extra;
     otherwise
         error('Undefined algorithm!')
 end

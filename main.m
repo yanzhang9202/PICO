@@ -7,7 +7,7 @@ clc;
 PICO_start;
 
 % Generate problem data
-rnd_seed = 2;
+rnd_seed = 1;
 rng(rnd_seed);
 
 pb_type = 'randQP';

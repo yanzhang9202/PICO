@@ -7,20 +7,22 @@ clc;
 PICO_start;
 
 % Generate problem data
-rnd_seed = 2;
+rnd_seed = 101;
 rng(rnd_seed);
 
 pb_type = 'randQP';
 gen_problem;
 
 % Run algorithms
-ind_solver = [1,2]; % 1 - matlab    2 - extra   3 - pico
+ind_solver = [1,2]; % 1 - matlab    2 - extra   3 - conso
 for ind = ind_solver
 switch ind
     case 1
         main_matlab;
     case 2
         main_extra;
+    case 3
+        main_conso;
     otherwise
         error('Undefined algorithm!')
 end

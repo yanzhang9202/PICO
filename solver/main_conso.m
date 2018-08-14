@@ -37,4 +37,15 @@ for ii = 2 : iter_max
     end    
 end
 
+sol{ind}.x = x;
+sol{ind}.x_itr = x_itr;
+sol{ind}.x_avg = x_avg;
+sol{ind}.eps = epsl;
+sol{ind}.rsd = rsd;
+sol{ind}.x0 = x0;
+sol{ind}.alpha = alpha;
+sol{ind}.num_itr = ii;
+
+clear alpha epsl f H ii jj rsd temp w1 x x0 x_avg x_itr
+
 

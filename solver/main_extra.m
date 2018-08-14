@@ -1,6 +1,6 @@
 %% Extra solver by W.Shi
 alpha = 1e-2;   % Step size
-iter_max = 2e3;
+iter_max = 3e3;
 epsl = 1e-2;
 w1 = gph.wgt';
 w2 = w1 - (gph.wgt + eye(N))'/2;
@@ -43,6 +43,10 @@ for ii = 3 : iter_max
        if mod(ii, 200) == 1
            fprintf(['Extra at iter. ', num2str(ii), ' with ',...
             'accuracy ', num2str(rsd), '...\n'])
+       end
+       if ii == iter_max
+        fprintf(['Extra fails at iter. ', num2str(ii), ' with '...
+            'accuracy ', num2str(rsd), '. \n\n'])
        end
     end
 end

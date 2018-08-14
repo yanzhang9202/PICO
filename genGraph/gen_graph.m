@@ -1,4 +1,4 @@
-graph_type = 2;     % 1 - doubly stochastic matrix, directed (not for C-ADMM)
+graph_type = 1;     % 1 - doubly stochastic matrix, directed (not for C-ADMM)
                     % 2 - symm. doubly stoch. matrix, undirected
 connt_type = 2;  % 0 - relative dense network
                 % 1 - specify the number of edges
@@ -7,7 +7,7 @@ connt_type = 2;  % 0 - relative dense network
 switch graph_type
     case 1
     % Generate doubly stochastic matrix
-    gph.wgt = geneDbStoch(data.N);
+    gph.wgt = geneDbStoch(N);
     gph.adj = AdjDS(gph.wgt);
     case 2
     % Generate doubly stochastic matrix based on a connected

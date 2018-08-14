@@ -1,6 +1,7 @@
 %% PI Consensus Optimization
 alpha = 1e-2;   % Step size
-iter_max = 2e3;
+beta = 5e-1;    % Gain for the integral term
+iter_max = 3e3;
 epsl = 1e-2;
 w1 = gph.wgt';
 w2 = (gph.wgt - eye(N))';
@@ -22,7 +23,7 @@ for ii = 2 : iter_max
     temp_x = x_itr*w1;
     temp_z = z_itr*w2;
     for jj = 1 : N
-        x(:,jj,ii) = temp_x(:,jj) + temp_z(:,jj) - alpha*(Q(:,:,jj)*x_itr(:,jj)... 
+        x(:,jj,ii) = temp_x(:,jj) + beta*temp_z(:,jj) - alpha*(Q(:,:,jj)*x_itr(:,jj)... 
             +q(:,jj));        
     end
     z_itr = z_itr - x_itr*w2;
@@ -39,17 +40,21 @@ for ii = 2 : iter_max
            fprintf(['PICO at iter. ', num2str(ii), ' with ',...
             'accuracy ', num2str(rsd), '...\n'])
        end
+       if ii == iter_max
+        fprintf(['PICO fails at iter. ', num2str(ii), ' with '...
+            'accuracy ', num2str(rsd), '. \n\n'])
+       end       
     end    
 end
 
-sol{ind}.x = x;
-sol{ind}.x_itr = x_itr;
-sol{ind}.x_avg = x_avg;
-sol{ind}.z_itr = z_itr;
-sol{ind}.eps = epsl;
-sol{ind}.rsd = rsd;
-sol{ind}.x0 = x0;
-sol{ind}.alpha = alpha;
-sol{ind}.num_itr = ii;
-
-clear alpha epsl f H ii jj rsd temp_x temp_z w1 w2 x x0 x_avg x_itr z_itr
+% sol{ind}.x = x;
+% sol{ind}.x_itr = x_itr;
+% sol{ind}.x_avg = x_avg;
+% sol{ind}.z_itr = z_itr;
+% sol{ind}.eps = epsl;
+% sol{ind}.rsd = rsd;
+% sol{ind}.x0 = x0;
+% sol{ind}.alpha = alpha;
+% sol{ind}.num_itr = ii;
+% 
+% clear alpha epsl f H ii jj rsd temp_x temp_z w1 w2 x x0 x_avg x_itr z_itr

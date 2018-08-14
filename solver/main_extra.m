@@ -40,9 +40,9 @@ for ii = 3 : iter_max
             'accuracy ', num2str(rsd), '. \n\n'])
         break;
     else
-       if mod(ii, 10) == 1
+       if mod(ii, 200) == 1
            fprintf(['Extra at iter. ', num2str(ii), ' with ',...
-            'accuracy', num2str(rsd), '...\n'])
+            'accuracy ', num2str(rsd), '...\n'])
        end
     end
 end
